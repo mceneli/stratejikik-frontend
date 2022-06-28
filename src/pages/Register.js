@@ -32,7 +32,7 @@ function Register() {
     //var { uname, pass } = document.forms[0];
 
 	const user = { username: event.target.uname.value };
-    axios.post('http://localhost:5000/users/add', user)
+    axios.post(process.env.BACKEND_PATH+'/users/add', user)
         .then(response => this.setState({ articleId: response.data.id }))
         .catch(error => {
 setErrorMessages({ name: "pass", message: "post hatası" });
