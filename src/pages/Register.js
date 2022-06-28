@@ -32,7 +32,7 @@ function Register() {
     //var { uname, pass } = document.forms[0];
 
 	const user = { username: event.target.uname.value };
-    axios.post(process.env.BACKEND_PATH+'/users/add', user)
+    axios.post('https://stratejikik-backend.herokuapp.com/users/add', user)
         .then(response => this.setState({ articleId: response.data.id }))
         .catch(error => {
 setErrorMessages({ name: "pass", message: "post hatası" });
