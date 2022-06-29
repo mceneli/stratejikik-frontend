@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
 import "../styles.css";
+require('dotenv').config();
 
 function Register() {
   // React States
@@ -30,12 +31,12 @@ function Register() {
     event.preventDefault();
 
     //var { uname, pass } = document.forms[0];
-
+    const backendUrl = process.env.REACT_APP_BACKEND_PATH + "/users/add";
 	const user = { username: event.target.uname.value };
-    axios.post('https://stratejikik-backend.herokuapp.com/users/add', user)
+    axios.post(backendUrl, user)
         .then(response => this.setState({ articleId: response.data.id }))
         .catch(error => {
-setErrorMessages({ name: "pass", message: "post hatası" });
+setErrorMessages({ name: "pass", message: "POST ERROR" });
         });
     // Find user login info
    	//const userData = database.find((user) => user.username === uname.value);
