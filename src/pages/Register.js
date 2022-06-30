@@ -32,7 +32,8 @@ function Register() {
 
     //var { uname, pass } = document.forms[0];
     const backendUrl = process.env.REACT_APP_BACKEND_PATH + "/users/add";
-	const user = { username: event.target.uname.value };
+	const user = { username: event.target.uname.value
+                      ,password: event.target.pass.value };
     axios.post(backendUrl, user)
         .then(response => this.setState({ articleId: response.data.id }))
         .catch(error => {
