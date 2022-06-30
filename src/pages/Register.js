@@ -5,61 +5,27 @@ import "../styles.css";
 require('dotenv').config();
 
 function Register() {
-  // React States
-  const [errorMessages, setErrorMessages] = useState({});
+  const [messages, setMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  // User Login info
-  const database = [
-    {
-      username: "user1",
-      password: "pass1"
-    },
-    {
-      username: "user2",
-      password: "pass2"
-    }
-  ];
-
-  const errors = {
-    uname: "invalid username",
-    pass: "invalid password"
-  };
-
   const handleSubmit = (event) => {
-//Prevent page reload
     event.preventDefault();
 
-    //var { uname, pass } = document.forms[0];
     const backendUrl = process.env.REACT_APP_BACKEND_PATH + "/users/add";
 	const user = { username: event.target.uname.value
                       ,password: event.target.pass.value };
-    axios.post(backendUrl, user)
-        .then(response => this.setState({ articleId: response.data.id }))
+        setIsSubmitted(true)
+        axios.post(backendUrl, user)
         .catch(error => {
-setErrorMessages({ name: "pass", message: "POST ERROR" });
-        });
-    // Find user login info
-   	//const userData = database.find((user) => user.username === uname.value);
-
-    // Compare user info
-    /*if (userData) {
-      if (userData.password !== pass.value) {
-        // Invalid password
-        setErrorMessages({ name: "pass", message: errors.pass });
-      } else {
-        setIsSubmitted(true);
-      }
-    } else {
-      // Username not found
-      setErrorMessages({ name: "uname", message: errors.uname });
-    }*/
+          alert("Hata Oluştu")
+          setIsSubmitted(false)
+        })
   };
 
   // Generate JSX code for error message
-  const renderErrorMessage = (name) =>
-    name === errorMessages.name && (
-      <div className="error">{errorMessages.message}</div>
+  const renderMessage = (name) =>
+    name === messages.name && (
+      <div className="msg">{messages.message}</div>
     );
 
   // JSX code for login form
@@ -67,17 +33,18 @@ setErrorMessages({ name: "pass", message: "POST ERROR" });
     <div className="form">
       <form onSubmit={handleSubmit}>
         <div className="input-container">
-          <label>Username </label>
+          <label>Kullanıcı Adı </label>
           <input type="text" name="uname" required />
-          {renderErrorMessage("uname")}
         </div>
         <div className="input-container">
-          <label>Password </label>
+          <label>Şifre</label>
           <input type="password" name="pass" required />
-          {renderErrorMessage("pass")}
         </div>
         <div className="button-container">
           <input type="submit" />
+        </div>
+        <div>
+          {renderMessage("msg")}
         </div>
       </form>
     </div>
@@ -86,8 +53,8 @@ setErrorMessages({ name: "pass", message: "POST ERROR" });
   return (
     <div className="app">
       <div className="login-form">
-        <div className="title">Sign In</div>
-        {isSubmitted ? <div>User is successfully logged in</div> : renderForm}
+        <div className="title">Kayıt Ol</div>
+        {isSubmitted ? <div>Kayıt olundu.</div> : renderForm}
       </div>
     </div>
   );

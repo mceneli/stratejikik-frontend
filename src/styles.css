@@ -97,7 +97,7 @@ input[type="submit"]:hover {
   display: flex;
 }
 
-.error {
+.msg {
   color: red;
   font-size: 12px;
 }
