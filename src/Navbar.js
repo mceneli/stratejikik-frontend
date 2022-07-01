@@ -8,7 +8,7 @@ export default function Navbar() {
         Stratejikik
       </Link>
       <ul>
-        <CustomLink to="/pricing">Pricing</CustomLink>
+        <CustomLink to="/login">Login</CustomLink>
         <CustomLink to="/about">About</CustomLink>
       </ul>
     </nav>
