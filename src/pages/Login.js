@@ -15,11 +15,20 @@ function Login() {
 	const user = { username: event.target.uname.value
                       ,password: event.target.pass.value };
         setIsSubmitted(true)
-        const { data: res } =axios.post(backendUrl, user)
-        localStorage.setItem("token", res.data);
-        alert(res.message)
+        axios.get(backendUrl+"/"+event.target.uname.value)
+        .then(response => {
+        if(response.data){
+         alert(response.data.username+" login oldu");
+        }else{
+         alert("Hatalı Kullanıcı Adı/Şifre");
+        }
+      })
+      .catch((error) => {
+        alert(error);
+      })
+        //localStorage.setItem("token", res.data);
     }catch(error){
-     alert(error+"###")
+     alert(error)
      setIsSubmitted(false)
     }
   };
