@@ -17,7 +17,7 @@ function Register() {
         setIsSubmitted(true)
         axios.post(backendUrl, user)
         .catch(error => {
-          alert("Hata Oluştu")
+          alert("Hata Oluştu"+error)
           setIsSubmitted(false)
         })
   };
