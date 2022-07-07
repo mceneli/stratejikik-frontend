@@ -37,7 +37,7 @@ function Login() {
      alert(error)
      setIsSubmitted(false)
     }*/
-    fetch("/login",{
+    fetch(backendUrl,{
      method:"POST",
      headers:{
       "Content-type":"application/json"
@@ -46,10 +46,9 @@ function Login() {
     })
     .then(res=>res.json())
     .then(data=>{
-          localStorage.setItem({"token":data.token})
+          localStorage.setItem("token",data.token)
           alert(data.token);
     })
-    alert(localStorage.getItem("token"));
   };
 
 
