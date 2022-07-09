@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
 import "../styles.css";
-
 import {useNavigate} from "react-router";
 import {useEffect} from "react";
 
@@ -16,27 +15,10 @@ function Login() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    //try{
+
     const backendUrl = process.env.REACT_APP_BACKEND_PATH + "/users/login";
 	const user = { username: event.target.uname.value
                       ,password: event.target.pass.value };
-       /* setIsSubmitted(true)
-        axios.get(backendUrl+"/"+event.target.uname.value)
-        .then(response => {
-        if(response.data){
-         alert(response.data.username+" login oldu");
-        }else{
-         alert("Hatalı Kullanıcı Adı/Şifre");
-        }
-      })
-      .catch((error) => {
-        alert(error);
-      })
-        //localStorage.setItem("token", res.data);
-    }catch(error){
-     alert(error)
-     setIsSubmitted(false)
-    }*/
     fetch(backendUrl,{
      method:"POST",
      headers:{
@@ -47,18 +29,17 @@ function Login() {
     .then(res=>res.json())
     .then(data=>{
           localStorage.setItem("token",data.token)
-          alert(data.token);
+          alert(localStorage.getItem('token'));
     })
   };
 
-
-  // Generate JSX code for error message
+  //error message
   const renderMessage = (name) =>
     name === messages.name && (
       <div className="msg">{messages.message}</div>
     );
 
-  // JSX code for login form
+  //login form
   const renderForm = (
     <div className="form">
       <form onSubmit={handleSubmit}>

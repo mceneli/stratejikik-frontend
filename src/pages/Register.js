@@ -11,9 +11,9 @@ function Register() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const backendUrl = process.env.REACT_APP_BACKEND_PATH + "/users/add";
+  const backendUrl = process.env.REACT_APP_BACKEND_PATH + "/users/add";
 	const user = { username: event.target.uname.value
-                      ,password: event.target.pass.value };
+                ,password: event.target.pass.value };
         setIsSubmitted(true)
         axios.post(backendUrl, user)
         .catch(error => {
@@ -22,13 +22,13 @@ function Register() {
         })
   };
 
-  // Generate JSX code for error message
+  //error message
   const renderMessage = (name) =>
     name === messages.name && (
       <div className="msg">{messages.message}</div>
     );
 
-  // JSX code for login form
+  //register form
   const renderForm = (
     <div className="form">
       <form onSubmit={handleSubmit}>
